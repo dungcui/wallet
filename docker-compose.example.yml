@@ -1,0 +1,114 @@
+version: "3"
+services:
+  wallet:
+    # ports:
+    #   - 3000:3000
+	  #   - 9229:9229
+    build: .
+    depends_on:
+    # - mq
+    - db
+    volumes:
+      - ./certs:/usr/src/wallet/certs
+    environment:
+      # AMQP_URL: amqp://mq:5672
+      # BLOCKS_QUEUE_EXCHANGE: exchange
+      DATABASE_URL: postgres://wallet:@db:5432/wallet
+      DEBUG: wallet:*
+      SERVER_SECRET: secret
+      NODE_ENV: development
+      SERVICE_NAMES: eos
+      SERVICE_TYPE: worker
+      TOPIC: SCRYPTO_TRANSACTIONS
+      PARTITION: 0
+      KAFKA_CONNECT_URL: 103.48.193.194:2181
+      PORT: 3000
+      KEY_TOKEN: XYOcxRhEKlmVm0pC
+
+      # TRON configs
+      TRON_API_URL: https://api.tronscan.org
+      TRON_NODE_URL: http://tron-node.quoine.com
+      TRON_SLEEP_TIME: 10
+      TRON_MINIMUM_MOVE_FUND: 2000
+      TRON_START_BLOCK_HEIGHT: 1616920
+      TRON_MINIMUM_CONFIRMATIONS: 50
+
+      # ETH configs
+      ETHEREUM_NODE_URL: http://95.216.69.201:8545
+      ETHEREUM_SLEEP_TIME: 10
+      ETHEREUM_START_BLOCK_HEIGHT: 3292973
+      ETHEREUM_MINIMUM_CONFIRMATION: 2 # default 12
+      ETHEREUM_GAS_LIMIT: 21000
+      ETHEREUM_GAS_PRICE: 9 # by gwei
+      ETHEREUM_BASE_FEE: 0.000189
+      # BTC configs
+      BTC_NODE_URL: http://admin:secret@103.48.193.194:18332
+      BTC_MAXIMUM_INPUT: 250
+      BTC_MAXIMUM_FEE: 100000
+      BTC_MAXIMUM_FEE_PER_BYTE: 50
+      BTC_AVERAGE_FEE_BLOCKS: 10
+      BTC_MINIMUM_CONFIRMATION: 6
+      BTC_SLEEP_TIME: 10
+      BTC_START_BLOCK_HEIGHT: 1440402
+
+
+
+
+      BSV_NODE_URL: http://admin:secret@95.216.227.169:8332  # BSV, mannet
+      BSV_MAXIMUM_INPUT: 250
+      BSV_MAXIMUM_FEE: 100000
+      BSV_MAXIMUM_FEE_PER_BYTE: 50
+      BSV_AVERAGE_FEE_BLOCKS: 10
+      BSV_MINIMUM_CONFIRMATION: 6
+      BSV_SLEEP_TIME: 10
+      BSV_START_BLOCK_HEIGHT: 571701
+
+      # USDT configs
+      USDT_NODE_URL: http://admin:secret@103.42.57.234:8332
+      # USDT_NODE_URL: http://admin:secret@95.216.69.201:8332
+      USDT_MINIMUM_CONFIRMATION: 6
+      USDT_SLEEP_TIME: 10
+      USDT_START_BLOCK_HEIGHT: 550155
+
+      # Stellar configs
+      STELLAR_API_URL: https://horizon.stellar.org
+      STELLAR_SLEEP_TIME: 1
+      STELLAR_MINIMUM_CONFIRMATION: 1
+      STELLAR_ITEM_PER_PAGE: 200
+      STELLAR_START_BLOCK_HEIGHT: 0
+
+      # VET configs
+      VET_SLEEP_TIME: 10
+      VET_API_SLEEP_TIME: 5
+      VET_MINIMUM_CONFIRMATION: 50
+      VET_START_BLOCK_HEIGHT: 339750
+      VET_CHAIN_TAG: 0x4a
+      VET_GAS_LIMIT: 21000
+
+      # ONTOLOGY configs
+      ONTOLOGY_SLEEP_TIME: 5
+      ONTOLOGY_START_BLOCK_HEIGHT: 289974
+      ONTOLOGY_FETCH_BLOCK_CONCURRENCY: 10
+      ONTOLOGY_MINIMUM_CONFIRMATION: 5 # Production: 20q
+      ONTOLOGY_API_URL: http://polaris1.ont.io:20334
+      ONTOLOGY_API_TIMEOUT: 5000
+      ONTOLOGY_BASE_FEE: 0.01
+
+      # SOPHIATX configs
+      SOPHIATX_API_URL: https://walletapi.sophiatx.com/
+      SOPHIATX_SLEEP_TIME: 10
+      SOPHIATX_ITEM_PER_PAGE: 100
+      SOPHIATX_START_BLOCK_HEIGHT: 0
+      SOPHIATX_MINIMUM_CONFIRMATION: 50
+
+    command: npm run inspect
+  # db:
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: wallet
+  #   image: postgres:9.6-alpine
+  # mq:
+  #   ports:
+  #     - 5672:5672
+  #   image: rabbitmq:3

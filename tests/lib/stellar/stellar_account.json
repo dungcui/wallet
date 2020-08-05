@@ -1,0 +1,75 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM"
+    },
+    "transactions": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/transactions{?cursor,limit,order}",
+      "templated": true
+    },
+    "operations": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/operations{?cursor,limit,order}",
+      "templated": true
+    },
+    "payments": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/payments{?cursor,limit,order}",
+      "templated": true
+    },
+    "effects": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/effects{?cursor,limit,order}",
+      "templated": true
+    },
+    "offers": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/offers{?cursor,limit,order}",
+      "templated": true
+    },
+    "trades": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/trades{?cursor,limit,order}",
+      "templated": true
+    },
+    "data": {
+      "href": "https://horizon.stellar.org/accounts/GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM/data/{key}",
+      "templated": true
+    }
+  },
+  "id": "GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM",
+  "paging_token": "",
+  "account_id": "GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM",
+  "sequence": "57760979349406150",
+  "subentry_count": 1,
+  "thresholds": {
+    "low_threshold": 0,
+    "med_threshold": 0,
+    "high_threshold": 0
+  },
+  "flags": {
+    "auth_required": false,
+    "auth_revocable": false
+  },
+  "balances": [
+    {
+      "balance": "28550710.5880675",
+      "limit": "922337203685.4775807",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "asset_type": "credit_alphanum4",
+      "asset_code": "SIX",
+      "asset_issuer": "GDMS6EECOH6MBMCP3FYRYEVRBIV3TQGLOFQIPVAITBRJUMTI6V7A2X6Z"
+    },
+    {
+      "balance": "1219865.5625464",
+      "buying_liabilities": "0.0000000",
+      "selling_liabilities": "0.0000000",
+      "asset_type": "native"
+    }
+  ],
+  "signers": [
+    {
+      "public_key": "GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM",
+      "weight": 1,
+      "key": "GA7OPN4A3JNHLPHPEWM4PJDOYYDYNZOM7ES6YL3O7NC3PRY3V3UX6ANM",
+      "type": "ed25519_public_key"
+    }
+  ],
+  "data": {}
+}

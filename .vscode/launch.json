@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Run tests",
+        "program": "${workspaceFolder}/test.js",
+        "args": [
+          "-u",
+          "tdd",
+          "--timeout",
+          "999999",
+          "--colors",
+          "${workspaceFolder}/tests"
+        ],
+        "internalConsoleOptions": "openOnSessionStart"
+      },
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Attach to docker",
+        "address": "localhost",
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/usr/src/wallet/",
+        "protocol": "inspector"
+      }
+    ]
+  }
+  

@@ -1,0 +1,68 @@
+{
+    "type": "move_fund",
+    "transactions": [
+        {
+            "id": 585,
+            "from_path": "0/0/22",
+            "to_path": "100/0/0",
+            "gross_amount": "1.64",
+            "nonce": 0,
+            "gas_price": 20,
+            "gas_limit": 150000,
+            "currency": "ERC20",
+            "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "decimal": 6
+        },
+        {
+            "id": 599,
+            "from_path": "0/0/60",
+            "to_path": "100/0/0",
+            "gross_amount": "9.04",
+            "nonce": 5,
+            "gas_price": 20,
+            "gas_limit": 150000,
+            "currency": "ERC20",
+            "contract": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+            "decimal": 18
+        },
+        {
+            "id": 600,
+            "from_path": "0/0/60",
+            "to_path": "100/0/0",
+            "gross_amount": "8.7",
+            "nonce": 5,
+            "gas_price": 20,
+            "gas_limit": 150000,
+            "currency": "ERC20",
+            "contract": "0x8e870d67f660d95d5be530380d0ec0bd388289e1",
+            "decimal": 18
+        },
+        {
+            "id": 615,
+            "from_path": "0/0/57",
+            "to_path": "100/0/0",
+            "gross_amount": "11995",
+            "nonce": 1,
+            "gas_price": 20,
+            "gas_limit": 150000,
+            "currency": "EaRC20",
+            "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+            "decimal": 6
+        },
+        {
+            "id": 628,
+            "from_path": "0/0/39",
+            "to_path": "100/0/0",
+            "gross_amount": "495",
+            "nonce": 1,
+            "gas_price": 20,
+            "gas_limit": 150000,
+            "currency": "ERC20",
+            "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+            "decimal": 6
+        }
+    ],
+    "meta": {
+        "wallet_id": 10
+    }
+}

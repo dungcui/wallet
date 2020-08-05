@@ -1,0 +1,48 @@
+version: "3"
+services:
+  wallet:
+    # ports:
+    # - 3000:3000
+    # - 9229:9229
+    build: .
+    depends_on:
+      # - mq
+      - db
+    volumes:
+      - ./certs:/usr/src/wallet/certs
+    environment:
+      # AMQP_URL: amqp://mq:5672
+      # BLOCKS_QUEUE_EXCHANGE: exchange
+      DATABASE_URL: postgres://wallet:@db:5432/wallet
+      DEBUG: wallet:*
+      SERVER_SECRET: secret
+      NODE_ENV: development
+      SERVICE_NAMES: tron
+      SERVICE_TYPE: worker
+      TOPIC: CRYPTO_TRANSACTIONS
+      PARTITION: 0
+      KAFKA_CONNECT_URL: 202.143.111.190:32773,202.143.111.190:32772,202.143.111.190:32771
+      TOKEN_HASH : 73DDEE7525AB2FE401BF8BEEDC73422204DF70800EE1CB350DA667B3DD067B10350DA0D9DC525F13C5679F155E447A83B3DF81C1889EED9873F47C0F75DA663D
+      PORT: 3000
+      KEY_TOKEN: XYOcxRhEKlmVm0pC
+      
+      # TRON configs
+      TRC10_API_URL: https://api.tronscan.org
+      TRC10_NODE_URL: http://54.236.37.243:8090
+      TRC10_SLEEP_TIME: 50
+      TRC10_TIMEOUT: 20000
+      TRC10_MINIMUM_MOVE_FUND: 2000
+      TRC10_START_BLOCK_HEIGHT: 9871465
+      TRC10_MINIMUM_CONFIRMATIONS: 10
+
+    command: npm run inspect
+  db:
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: wallet
+    image: postgres:9.6-alpine
+  # mq:
+  #   ports:
+  #     - 5672:5672
+  #   image: rabbitmq:3

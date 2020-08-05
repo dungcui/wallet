@@ -1,0 +1,10 @@
+{
+  "id": 2,
+  "grossAmount": "10",
+  "toAddress": "GCKQXTQM2HWKZMSUYXINFYF7QMDTLG27E73AZTXRB4HR46NX72L2EV3B",
+  "memo": {
+    "type": "text",
+    "value": "test 2"
+  },
+  "currency": "TOKEN"
+}

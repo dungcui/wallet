@@ -1,0 +1,313 @@
+version: "3"
+services:
+  wallet:
+    ports:
+    - 3000:3000
+    - 9229:9229
+    build: .
+    depends_on:
+      # - mq
+      - db
+    volumes:
+      - ./certs:/usr/src/wallet/certs
+    environment:
+      # AMQP_URL: amqp://mq:5672
+      # BLOCKS_QUEUE_EXCHANGE: exchange
+      DATABASE_URL: postgres://wallet:@95.216.227.168:5432/wallet
+      DEBUG: wallet:*
+      SERVER_SECRET: secret
+      NODE_ENV: development
+      SERVICE_NAMES: doge,bnb,vet,erc20,ethereum,btc,eos,krp,ltc,dash,bch,tron,xrp,stellar,neo,bsv,zec,etc,cosmos,qtum,ontology,nem
+      SERVICE_TYPE: server
+      TOPIC: CRYPTO_TRANSACTIONS
+      PARTITION: 0
+      KAFKA_CONNECT_URL: 202.143.111.190:32773,202.143.111.190:32772,202.143.111.190:32771
+      TOKEN_HASH : ce733e52f2b6f0b5400b1e54c02ceb53
+      PORT: 3000
+      KEY_TOKEN: XYOcxRhEKlmVm0pC
+      SERVICE_NODE_URL: http://95.216.227.169:9000
+      SERVICE_SLEEP_TIME: 10000
+      SERVICE_TOKEN: S;h7b"./)R?Mkhc9
+      REPONSE_REQUEST_URL: https://admin.kryptoniex.com/api/webhook/withdraw-confirm
+
+
+      
+      # TRON configs
+      TRON_API_URL: https://api.tronscan.org
+      TRON_NODE_URL: https://api.trongrid.io
+      TRON_SLEEP_TIME: 10
+      TRON_MINIMUM_MOVE_FUND: 2000
+      TRON_START_BLOCK_HEIGHT: 1616920
+      TRON_MINIMUM_CONFIRMATIONS: 50
+
+
+
+      EOS_NODE_URL: http://95.216.69.201:8888
+      EOS_SLEEP_TIME: 10
+      EOS_MINIMUM_MOVE_FUND: 2000
+      EOS_START_BLOCK_HEIGHT: 42006311
+      EOS_MINIMUM_CONFIRMATIONS: 50
+      #EOS_ACCOUNT_NAME: eoskryptonan
+      EOS_ACCOUNT_NAME: eoskryptanhw
+      EOS_TOKEN_ACCOUNT : eosio.token
+      EOS_ITEM_PER_PAGE : 100
+      EOS_PUBLIC_COLD_KEY : EOS7CpfWnTNDctvGLSfLaVNvkie7qwPEvb9DfKazcYYyZkTPMrMKG
+      EOS_PUBLIC_HOT_KEY : EOS6dtWzpJtcBxsMRnJXB9W8Zzm3EAduve91dQfdU7yANvsxuBe7D
+
+      
+
+      KRP_NODE_URL: http://95.216.69.201:8888
+      KRP_SLEEP_TIME: 10
+      KRP_MINIMUM_MOVE_FUND: 2000
+      KRP_START_BLOCK_HEIGHT: 42006311
+      KRP_MINIMUM_CONFIRMATIONS: 50
+      # KRP_ACCOUNT_NAME: krpkryptonan
+      # KRP_ACCOUNT_NAME: forestersmct
+      KRP_TOKEN_ACCOUNT : kryptoniexan
+      KRP_ITEM_PER_PAGE : 100
+      # KRP_PUBLIC_KEY : EOS7Ju9xbnnWJZaFMqSDUWcm3YurN9f7wKHHtN6SMYK9jAFd5Gyrr
+      KRP_PUBLIC_COLD_KEY : EOS7rLNwCEA7CPFLCfYPd7fRHtSmWBKEvDQwyx6BzDyaMd9SzT9tU
+      KRP_PUBLIC_HOT_KEY : EOS5eiKoqcuj9kQ6a1xLwusGxvEhZhtgbS9ed6Zof4eF7uJNzNYzp
+
+
+      BNB_NODE_URL: https://dex.binance.org/
+      BNB_SLEEP_TIME: 10
+      BNB_MINIMUM_MOVE_FUND: 2000
+      BNB_START_BLOCK_HEIGHT: 10908675
+      BNB_MINIMUM_CONFIRMATIONS: 50
+      BNB_ITEM_PER_PAGE : 100
+      BNB_TIMEOUT: 5000
+
+  
+
+      # ETH configs
+      # ETHEREUM_NODE_URL: http://35.198.195.112:8545
+      ETHEREUM_NODE_URL: ws://95.216.227.169:8546 # testnet
+      ETHEREUM_SLEEP_TIME: 10
+      ETHEREUM_START_BLOCK_HEIGHT: 7332295
+      ETHEREUM_MINIMUM_CONFIRMATION: 2 # default 12
+      ETHEREUM_GAS_LIMIT: 21000
+      ETHEREUM_GAS_PRICE: 60 # by gwei
+      ETHEREUM_BASE_FEE: 0.000189
+
+
+      VET_API_URL: https://vethor-node.vechain.com # testnet
+      VET_SLEEP_TIME: 10
+      VET_START_BLOCK_HEIGHT: 7332295
+      VET_MINIMUM_CONFIRMATION: 2 # default 12
+      VET_GAS_LIMIT: 21000
+      VET_GAS_PRICE: 9 # by gwei
+      VET_BASE_FEE: 0.000189
+      VET_API_TIMEOUT : 5000
+      VET_API_SLEEP_TIME : 1000
+
+
+
+      ETC_NODE_URL: ws://95.216.227.170:8546 # mainnet
+      ETC_SLEEP_TIME: 10
+      ETC_START_BLOCK_HEIGHT: 8457502
+      ETC_MINIMUM_CONFIRMATION: 2 # default 12
+      ETC_GAS_LIMIT: 21000
+      ETC_GAS_PRICE: 9 # by gwei
+      ETC_BASE_FEE: 0.000189
+
+
+
+
+      ERC20_NODE_URL: ws://95.216.227.169:8546 # testnet
+      ERC20_SLEEP_TIME: 10
+      ERC20_START_BLOCK_HEIGHT: 7332295
+      ERC20_MINIMUM_CONFIRMATION: 2 # default 12
+      ERC20_GAS_LIMIT: 100000
+      ERC20_GAS_PRICE:  90 # by gwei
+      ERC20_BASE_FEE: 0.004
+
+
+      # BTC configs 
+      # BTC configs
+      # BTC_NODE_URL: http://admin:secret@202.143.110.50:8332
+      # BTC_NODE_URL: http://admin:secret@103.42.57.234:8332
+      BTC_NODE_URL: http://admin:secret@95.216.227.168:8332  # testnet
+      BTC_MAXIMUM_INPUT: 250
+      BTC_MAXIMUM_FEE: 1000
+      BTC_MAXIMUM_FEE_PER_BYTE: 50
+      BTC_AVERAGE_FEE_BLOCKS: 10
+      BTC_MINIMUM_CONFIRMATION: 6
+      BTC_SLEEP_TIME: 10
+      BTC_START_BLOCK_HEIGHT: 571701
+      BTC_XPRIV : xprv9s21ZrQH143K2G8n9ujjhfT4pEqTuCpXfNbUG6mzCoiQo3HLCqK3EwfJnn8rwrJAq1sfUqSyFwSGBQELrmwXFLVRARzdws7aNjAnW2kCK2n
+
+
+
+      BSV_NODE_URL: http://admin:secret@95.216.227.169:8332  # BSV, mannet
+      BSV_MAXIMUM_INPUT: 250
+      BSV_MAXIMUM_FEE: 100000
+      BSV_MAXIMUM_FEE_PER_BYTE: 50
+      BSV_AVERAGE_FEE_BLOCKS: 10
+      BSV_MINIMUM_CONFIRMATION: 6
+      BSV_SLEEP_TIME: 10
+      BSV_START_BLOCK_HEIGHT: 571701
+
+
+
+      #LTC configs
+
+      LTC_NODE_URL: http://admin:secret@95.216.227.168:9332 # mainnet
+      LTC_MAXIMUM_INPUT: 250
+      LTC_MAXIMUM_FEE: 0.00100000
+      LTC_MAXIMUM_FEE_PER_BYTE: 0.00100000
+      LTC_AVERAGE_FEE_BLOCKS: 0.00100000
+      LTC_MINIMUM_CONFIRMATION: 6
+      LTC_SLEEP_TIME: 10
+      LTC_START_BLOCK_HEIGHT: 1625260
+
+
+      #DASH configs
+
+      DASH_NODE_URL: http://admin:secret@95.216.227.169:9998 # mainnet
+      DASH_MAXIMUM_INPUT: 250
+      DASH_MAXIMUM_FEE: 0.00300000
+      DASH_MAXIMUM_FEE_PER_BYTE: 0.00200000
+      DASH_AVERAGE_FEE_BLOCKS: 00200000
+      DASH_MINIMUM_CONFIRMATION: 6
+      DASH_SLEEP_TIME: 10
+      DASH_START_BLOCK_HEIGHT: 1022840
+
+
+      DOGE_NODE_URL: http://admin:secret@95.216.97.104:22555 # mainnet
+      DOGE_MAXIMUM_INPUT: 250
+      DOGE_MAXIMUM_FEE: 0.00300000
+      DOGE_MAXIMUM_FEE_PER_BYTE: 0.00200000
+      DOGE_AVERAGE_FEE_BLOCKS: 00200000
+      DOGE_MINIMUM_CONFIRMATION: 1
+      DOGE_SLEEP_TIME: 10
+      DOGE_START_BLOCK_HEIGHT: 2950132
+
+
+      BCH_NODE_URL: http://admin:secret@95.216.227.170:8332 # mainnet
+      BCH_MAXIMUM_INPUT: 250
+      BCH_MAXIMUM_FEE: 0.01000000
+      BCH_MAXIMUM_FEE_PER_BYTE: 0.01000000
+      BCH_AVERAGE_FEE_BLOCKS: 0.01000000
+      BCH_MINIMUM_CONFIRMATION: 6
+      BCH_SLEEP_TIME: 10
+      BCH_START_BLOCK_HEIGHT: 
+      
+
+
+      ZEC_NODE_URL: http://admin:secret@95.216.227.171:8232 # mainnet
+      ZEC_MAXIMUM_INPUT: 250
+      ZEC_MAXIMUM_FEE: 0.01000000
+      ZEC_MAXIMUM_FEE_PER_BYTE: 0.01000000
+      ZEC_AVERAGE_FEE_BLOCKS: 0.01000000
+      ZEC_MINIMUM_CONFIRMATION: 6
+      ZEC_SLEEP_TIME: 10
+      ZEC_START_BLOCK_HEIGHT: 580936
+      
+      #NEO
+      NEO_NODE_URL: http://95.217.42.58:10332 # mainnet
+      NEO_MAXIMUM_INPUT: 25
+      NEO_MAXIMUM_FEE: 0
+      NEO_MAXIMUM_FEE_PER_BYTE: 0.01000000
+      NEO_AVERAGE_FEE_BLOCKS: 0.01000000
+      NEO_MINIMUM_CONFIRMATION: 6
+      NEO_SLEEP_TIME: 10
+      NEO_START_BLOCK_HEIGHT: 3896240
+      NEO_SETTLEMENT_ADDRESS: AY4cwr1hNwhKPERRQXXByYR1hWM2tsAYyz
+
+      # USDT configs
+      USDT_NODE_URL: http://admin:secret@95.216.227.168:8332
+      # USDT_NODE_URL: http://admin:secret@95.216.69.201:8332
+      USDT_MINIMUM_CONFIRMATION: 6
+      USDT_SLEEP_TIME: 10
+      USDT_START_BLOCK_HEIGHT: 550929
+
+      # XRP configs
+      XRP_NODE_URL: http://s2.ripple.com:51234
+      XRP_API_URL : wss://s1.ripple.com
+      # XRP_NODE_URL: http://s.altnet.rippletest.net:51234
+      XRP_MINIMUM_CONFIRMATION: 6
+      XRP_SLEEP_TIME: 10
+      XRP_START_BLOCK_HEIGHT: 14755066
+      XRP_MINIMUM_CONFIRMATIONS: 50
+      XRP_ITEM_PER_PAGE : 100
+      XRP_TIMEOUT: 5000
+
+      # Stellar configs
+      STELLAR_API_URL: https://horizon.stellar.org
+      STELLAR_SLEEP_TIME: 1
+      STELLAR_MINIMUM_CONFIRMATION: 1
+      STELLAR_ITEM_PER_PAGE: 200
+      STELLAR_START_BLOCK_HEIGHT: 0
+
+      # VET configs
+      VET_SLEEP_TIME: 10
+      VET_API_SLEEP_TIME: 5
+      VET_MINIMUM_CONFIRMATION: 50
+      VET_START_BLOCK_HEIGHT: 339750
+      VET_CHAIN_TAG: 0x4a
+      VET_GAS_LIMIT: 21000
+
+      # ONTOLOGY configs
+      ONTOLOGY_SLEEP_TIME: 5
+      ONTOLOGY_START_BLOCK_HEIGHT: 7190300
+      ONTOLOGY_FETCH_BLOCK_CONCURRENCY: 10
+      ONTOLOGY_MINIMUM_CONFIRMATION: 5 # Production: 20q
+      #ONTOLOGY_API_URL: http://polaris1.ont.io:20334
+      ONTOLOGY_API_URL: http://dappnode2.ont.io:20334
+      ONTOLOGY_API_TIMEOUT: 5000
+      ONTOLOGY_GAS_PRICE:  500
+      ONTOLOGY_GAS_LIMIT: 20000
+      ONTOLOGY_BASE_FEE: 0.01
+
+      # SOPHIATX configs
+      SOPHIATX_API_URL: https://walletapi.sophiatx.com/
+      SOPHIATX_SLEEP_TIME: 10
+      SOPHIATX_ITEM_PER_PAGE: 100
+      SOPHIATX_START_BLOCK_HEIGHT: 0
+      SOPHIATX_MINIMUM_CONFIRMATION: 50
+
+      # COSMOS configs
+      COSMOS_NODE_URL: http://95.216.227.171:1317
+      COSMOS_SLEEP_TIME: 10
+      COSMOS_MINIMUM_CONFIRMATION: 1
+      COSMOS_ITEM_PER_PAGE: 200
+      COSMOS_START_BLOCK_HEIGHT: 0
+      COSMOS_TIMEOUT: 15000
+
+
+      #QTUM configs
+
+      QTUM_NODE_URL: http://admin:secret@95.216.97.104:3889 # mainnet
+      QTUM_MAXIMUM_INPUT: 250
+      QTUM_MAXIMUM_FEE: 0.00100000
+      QTUM_MAXIMUM_FEE_PER_BYTE: 0.00100000
+      QTUM_AVERAGE_FEE_BLOCKS: 0.00100000
+      QTUM_MINIMUM_CONFIRMATION: 6
+      QTUM_SLEEP_TIME: 10
+      QTUM_START_BLOCK_HEIGHT: 400000
+
+      # NEM configs
+      #NEM_NODE_URL: http://95.216.97.104:7890
+      NEM_NODE_URL: http://hugealice3.nem.ninja:7890
+      NEM_SLEEP_TIME: 10
+      NEM_MINIMUM_CONFIRMATION: 10
+      NEM_ITEM_PER_PAGE: 25
+      NEM_START_BLOCK_HEIGHT: 0
+      NEM_TIMEOUT: 15000
+
+
+    command: npm run inspect
+  db:
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: Itvietsoftwallet!^%
+    image: postgres:9.6-alpine
+
+
+  mq:
+    ports:
+      - 5672:5672
+    image: rabbitmq:3

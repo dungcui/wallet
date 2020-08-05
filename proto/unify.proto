@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package wallet;
+
+service WalletService {
+  rpc BundleTransactions (BundleTransactionsRequest) returns (BundleTransactionsResponse) {}
+  rpc GetAddress (GetAddressRequest) returns (GetAddressResponse) {}
+  rpc ValidateAddress (ValidateAddressRequest) returns (ValidateAddressResponse) {}
+  rpc AddWallet (AddWalletRequest) returns (AddWalletResponse) {}
+  rpc GetBalance (GetBalanceRequest) returns (GetBalanceResponse) {}
+  rpc Broadcast (BroadcastRequest) returns (BroadcastResponse) {}
+  rpc AddContractToken (AddContractTokenRequest) returns (AddContractTokenResponse) {}
+  rpc Ping (PingRequest) returns (PingResponse) {}
+  rpc GetStatus (GetStatusRequest) returns (GetStatusResponse) {}
+}
+
+message Memo {
+  string type = 1;
+  string value = 2;
+}
+
+message Transaction {
+  uint32 id = 1;
+  string gross_amount = 2;
+  string to_address = 3;
+  string currency = 4;
+  Memo memo = 5;
+}
+
+message BundleTransactionsRequest {
+  string currency = 1;
+  uint32 wallet_id = 2;
+  repeated Transaction transactions = 3;
+  string type = 4; // WITHDRAWAL: 'withdrawal' - MOVE_FUND: 'move_fund'
+}
+
+message BundleTransactionsResponse {
+  // JSON message
+  string payload = 1;
+}
+
+message ValidateAddressRequest {
+  string currency = 1;
+  string hash = 2;
+}
+
+message ValidateAddressResponse {
+  bool valid = 1;
+}
+
+message GetAddressRequest {
+  string currency = 1; // ETH
+  uint32 wallet_id = 2; // id
+  string path = 3; // path unique by user
+}
+
+message GetAddressResponse {
+  string hash = 1;
+}
+
+message AddWalletRequest {
+  string currency = 1;
+  repeated string xpubs = 2;
+  uint32 minimum = 3;
+  string settlement_address = 4;
+}
+
+message AddWalletResponse {
+  uint32 id = 1; // wallet_id
+  string change_address = 2; // settlement for TRON
+  string fee_address = 3; // deprecated
+}
+
+message GetBalanceRequest {
+  string currency = 1;
+  string address = 2;
+}
+
+message GetBalanceResponse {
+  string amount = 1;
+}
+
+message BroadcastRequest {
+  string currency = 1;
+  string payload = 2; // String of JSON
+}
+
+message BroadcastResponse {
+  string payload = 1; // String of JSON
+}
+
+message AddContractTokenRequest {
+  string currency = 1;
+  string address = 2;
+}
+
+message AddContractTokenResponse {
+  uint32 status_code = 1;
+}
+
+message PingRequest {
+}
+
+message PingResponse {
+  string time = 1;
+}
+
+message GetStatusRequest {
+  string currency = 1; // BTC
+  uint32 wallet_id = 2; // id
+}
+
+message GetStatusResponse {
+  string total_balance = 1;
+  string available_balance = 2;
+  string available_withdrawal = 3;
+}

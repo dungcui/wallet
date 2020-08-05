@@ -1,0 +1,190 @@
+version: "3"
+services:
+  wallet:
+    # ports:
+    # - 3000:3000
+    # - 9229:9229
+    build: .
+    depends_on:
+      # - mq
+      - db
+    volumes:
+      - ./certs:/usr/src/wallet/certs
+    environment:
+      # AMQP_URL: amqp://mq:5672
+      # BLOCKS_QUEUE_EXCHANGE: exchange
+      DATABASE_URL: postgres://wallet:@db:5432/wallet
+      DEBUG: wallet:*
+      SERVER_SECRET: secret
+      NODE_ENV: development
+      SERVICE_NAMES: etc
+      SERVICE_TYPE: worker
+      TOPIC: CRYPTO_TRANSACTIONS
+      PARTITION: 0
+      KAFKA_CONNECT_URL: 202.143.111.190:32773,202.143.111.190:32772,202.143.111.190:32771
+      TOKEN_HASH: 73DDEE7525AB2FE401BF8BEEDC73422204DF70800EE1CB350DA667B3DD067B10350DA0D9DC525F13C5679F155E447A83B3DF81C1889EED9873F47C0F75DA663D
+      PORT: 3000
+      KEY_TOKEN: XYOcxRhEKlmVm0pC
+
+      # TRON configs
+      TRON_API_URL: https://api.tronscan.org
+      TRON_NODE_URL: http://tron-node.quoine.com
+      TRON_SLEEP_TIME: 10
+      TRON_MINIMUM_MOVE_FUND: 2000
+      TRON_START_BLOCK_HEIGHT: 1616920
+      TRON_MINIMUM_CONFIRMATIONS: 50
+
+      EOS_NODE_URL: https://api.eosnewyork.io
+      EOS_SLEEP_TIME: 5
+      EOS_MINIMUM_MOVE_FUND: 2000
+      EOS_START_BLOCK_HEIGHT: 42006311
+      EOS_MINIMUM_CONFIRMATIONS: 50
+      EOS_ACCOUNT_NAME: fintegrixeos
+      EOS_TOKEN_ACCOUNT: eosio.token
+
+      KRP_NODE_URL: https://api.eosnewyork.io
+      KRP_SLEEP_TIME: 5
+      KRP_MINIMUM_MOVE_FUND: 2000
+      KRP_START_BLOCK_HEIGHT: 44671313
+      KRP_MINIMUM_CONFIRMATIONS: 5
+      KRP_ACCOUNT_NAME: kryptoniexio
+      KRP_TOKEN_ACCOUNT: kryptoniexio
+
+      # ETH configs
+      # ETHEREUM_NODE_URL: http://35.198.195.112:8545
+      ETHEREUM_NODE_URL: ws://95.216.227.169:8546 # testnet
+      ETHEREUM_SLEEP_TIME: 10
+      ETHEREUM_START_BLOCK_HEIGHT: 7332295
+      ETHEREUM_MINIMUM_CONFIRMATION: 2 # default 12
+      ETHEREUM_GAS_LIMIT: 21000
+      ETHEREUM_GAS_PRICE: 9 # by gwei
+      ETHEREUM_BASE_FEE: 0.000189
+
+      ERC20_NODE_URL: ws://95.216.227.169:8546 # testnet
+      ERC20_SLEEP_TIME: 10
+      ERC20_START_BLOCK_HEIGHT: 9171704
+      ERC20_MINIMUM_CONFIRMATION: 1 # default 12
+      ERC20_GAS_LIMIT: 150000
+      ERC20_GAS_PRICE: 20 # by gwei
+      ERC20_BASE_FEE: 0.003
+      ERC20_GAS_DISTRIBUTOR: 0.003
+      ERC20_PRIVATEKEY_FEE_ADDRESS: 5da5f84fe5b2afbd6128086a0f9d960982645eab21b768e5cdf7f6e620677125
+      ERC20_FEE_ADDRESS: "0x924DD664e6a0ea27b8Bf243be50154f57EB683BD"
+      # BTC configs
+      # BTC_NODE_URL: http://admin:secret@202.143.110.50:8332
+      # BTC_NODE_URL: http://admin:secret@103.42.57.234:8332
+
+      # ETH configs
+      # ETHEREUM_NODE_URL: http://35.198.195.112:8545
+      ETC_NODE_URL: ws://95.216.227.170:8546 # testnet
+      ETC_SLEEP_TIME: 10
+      ETC_START_BLOCK_HEIGHT: 8563219
+      ETC_MINIMUM_CONFIRMATION: 1 # default 12
+      ETC_GAS_LIMIT: 21000
+      ETC_GAS_PRICE: 9 # by gwei
+      ETC_BASE_FEE: 0.000189
+
+      BTC_NODE_URL: http://admin:secret@95.216.227.168:8332 # testnet
+      BTC_MAXIMUM_INPUT: 250
+      BTC_MAXIMUM_FEE: 100000
+      BTC_MAXIMUM_FEE_PER_BYTE: 50
+      BTC_AVERAGE_FEE_BLOCKS: 10
+      BTC_MINIMUM_CONFIRMATION: 6
+      BTC_SLEEP_TIME: 10
+      BTC_START_BLOCK_HEIGHT: 565600
+
+      BSV_NODE_URL: http://admin:secret@95.216.227.169:8332 # BSV, mannet
+      BSV_MAXIMUM_INPUT: 250
+      BSV_MAXIMUM_FEE: 100000
+      BSV_MAXIMUM_FEE_PER_BYTE: 50
+      BSV_AVERAGE_FEE_BLOCKS: 10
+      BSV_MINIMUM_CONFIRMATION: 6
+      BSV_SLEEP_TIME: 10
+      BSV_START_BLOCK_HEIGHT: 571701
+
+      #LTC configs
+      LTC_NODE_URL: http://admin:secret@95.216.2.19:9332 # mainnet
+      LTC_MAXIMUM_INPUT: 250
+      LTC_MAXIMUM_FEE: 0.00100000
+      LTC_MAXIMUM_FEE_PER_BYTE: 0.00100000
+      LTC_AVERAGE_FEE_BLOCKS: 0.00100000
+      LTC_MINIMUM_CONFIRMATION: 6
+      LTC_SLEEP_TIME: 10
+      LTC_START_BLOCK_HEIGHT: 901641
+
+      #DASH configs
+
+      DASH_NODE_URL: http://admin:secret@95.216.2.19:9998 # mainnet
+      DASH_MAXIMUM_INPUT: 250
+      DASH_MAXIMUM_FEE: 0.00300000
+      DASH_MAXIMUM_FEE_PER_BYTE: 0.00200000
+      DASH_AVERAGE_FEE_BLOCKS: 00200000
+      DASH_MINIMUM_CONFIRMATION: 6
+      DASH_SLEEP_TIME: 10
+      DASH_START_BLOCK_HEIGHT: 1022840
+
+      BCH_NODE_URL: http://admin:secret@95.216.2.19:8332 # mainnet
+      BCH_MAXIMUM_INPUT: 250
+      BCH_MAXIMUM_FEE: 0.01000000
+      BCH_MAXIMUM_FEE_PER_BYTE: 0.01000000
+      BCH_AVERAGE_FEE_BLOCKS: 0.01000000
+      BCH_MINIMUM_CONFIRMATION: 6
+      BCH_SLEEP_TIME: 10
+      BCH_START_BLOCK_HEIGHT: 570311
+
+      # USDT configs
+      USDT_NODE_URL: http://admin:secret@95.216.227.168:8332
+      # USDT_NODE_URL: http://admin:secret@95.216.69.201:8332
+      USDT_MINIMUM_CONFIRMATION: 6
+      USDT_SLEEP_TIME: 10
+      USDT_START_BLOCK_HEIGHT: 550929
+
+      # XRP configs
+      # XRP_NODE_URL: http://s2.ripple.com:51234
+      XRP_NODE_URL: http://s.altnet.rippletest.net:51234
+      XRP_MINIMUM_CONFIRMATION: 6
+      XRP_SLEEP_TIME: 10
+      XRP_START_BLOCK_HEIGHT: 14755066
+
+      # Stellar configs
+      STELLAR_API_URL: https://horizon.stellar.org
+      STELLAR_SLEEP_TIME: 1
+      STELLAR_MINIMUM_CONFIRMATION: 1
+      STELLAR_ITEM_PER_PAGE: 200
+      STELLAR_START_BLOCK_HEIGHT: 0
+
+      # VET configs
+      VET_SLEEP_TIME: 10
+      VET_API_SLEEP_TIME: 5
+      VET_MINIMUM_CONFIRMATION: 50
+      VET_START_BLOCK_HEIGHT: 339750
+      VET_CHAIN_TAG: 0x4a
+      VET_GAS_LIMIT: 21000
+
+      # ONTOLOGY configs
+      ONTOLOGY_SLEEP_TIME: 5
+      ONTOLOGY_START_BLOCK_HEIGHT: 289974
+      ONTOLOGY_FETCH_BLOCK_CONCURRENCY: 10
+      ONTOLOGY_MINIMUM_CONFIRMATION: 5 # Production: 20q
+      ONTOLOGY_API_URL: http://polaris1.ont.io:20334
+      ONTOLOGY_API_TIMEOUT: 5000
+      ONTOLOGY_BASE_FEE: 0.01
+
+      # SOPHIATX configs
+      SOPHIATX_API_URL: https://walletapi.sophiatx.com/
+      SOPHIATX_SLEEP_TIME: 10
+      SOPHIATX_ITEM_PER_PAGE: 100
+      SOPHIATX_START_BLOCK_HEIGHT: 0
+      SOPHIATX_MINIMUM_CONFIRMATION: 50
+
+    command: npm run inspect
+  db:
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: wallet
+    image: postgres:9.6-alpine
+  # mq:
+  #   ports:
+  #     - 5672:5672
+  #   image: rabbitmq:3
